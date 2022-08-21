@@ -1,0 +1,13 @@
+DML
+
+
+INSERT INTO TB_NEGOZI (negozio, indirizzo, dimensione_mq, dimensione_magazzino_mq, num_dipendenti) VALUES ('Abibas', 'Italia, via Marina 10', 150, 100, 0);
+
+INSERT INTO TB_DIPENDENTI (id_negozio, numero_matricola, nome, cognome, data_di_nascita, responsabile, codice_fiscale) VALUES (1, 1111, 'Mario', 'Rossi', '20010810', true, 'MMMMMMMMM1111111');
+
+INSERT INTO TB_ARTICOLI (codice, articolo, prezzo, peso, sezione, taglia) VALUES (1000, 'Scarpe da calcio', 50, 1, 'Calcio', true);
+INSERT INTO TB_ARTICOLI (codice, articolo, prezzo, peso, sezione, taglia) VALUES (2000, 'Raccetta da tennis', 120, 2, 'Tennis', false);
+
+INSERT INTO TB_GIACENZE (id_negozio, id_articolo, quantita, taglia) VALUES (1, 1, 13, 40);
+INSERT INTO TB_GIACENZE (id_negozio, id_articolo, quantita, taglia) VALUES (1, 1, 10, 41);
+INSERT INTO TB_GIACENZE (id_negozio, id_articolo, quantita, taglia) VALUES (1, 2, 5, 0);

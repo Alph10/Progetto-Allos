@@ -1,0 +1,69 @@
+<h3>Aggiungi articolo</h3><br>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+
+            <form class="mb-3" [formGroup]="formArticolo" (ngSubmit)="AggiungiArticolo()">
+                <div class="mb-3">
+                    <label class="form-label" for="nomeArticolo">Articolo</label>
+                    <input class="form-control" formControlName="nomeArticolo" name="nomeArticolo" type="text">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="codiceArticolo">Codice</label>
+                    <input class="form-control" formControlName="codiceArticolo" name="codiceArticolo" type="number">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="prezzoArticolo">Prezzo</label>
+                    <input class="form-control" formControlName="prezzoArticolo" name="prezzoArticolo" type="number">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="pesoArticolo">Peso</label>
+                    <input class="form-control" formControlName="pesoArticolo" name="pesoArticolo" type="number">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="sezioneArticolo">Sezione</label>
+                    <input class="form-control" formControlName="sezioneArticolo" name="sezioneArticolo" type="text">
+                </div>
+
+                <div class="form-check mb-4 mt-4">
+                    <label class="form-check-label" for="tagliaArticolo">Taglia</label>
+                    <input class="form-check-input" formControlName="tagliaArticolo" name="tagliaArticolo" type="checkbox">
+                </div>
+
+                <div class="alert alert-danger"*ngIf="formArticolo.controls['nomeArticolo'].invalid && formArticolo.controls['nomeArticolo'].touched">
+                    Inserire il nome dell'articolo
+                </div>
+
+                <div class="alert alert-danger"*ngIf="formArticolo.controls['codiceArticolo'].invalid && formArticolo.controls['codiceArticolo'].touched">
+                    Inserire il codice dell'articolo
+                </div>
+
+                <div class="alert alert-danger"*ngIf="formArticolo.controls['prezzoArticolo'].invalid && formArticolo.controls['prezzoArticolo'].touched">
+                    Inserire il prezzo dell'articolo
+                </div>
+
+                <div class="alert alert-danger"*ngIf="formArticolo.controls['pesoArticolo'].invalid && formArticolo.controls['pesoArticolo'].touched">
+                    Inserire il peso dell'articolo
+                </div>
+
+                <div class="alert alert-danger"*ngIf="formArticolo.controls['sezioneArticolo'].invalid && formArticolo.controls['sezioneArticolo'].touched">
+                    Inserire la sezione dell'articolo
+                </div>
+
+                <div class="alert alert-danger"*ngIf="codiceArticoloDuplicato">
+                    Esiste già un articolo con quel codice
+                </div>
+
+                <button class="btn btn-dark" style="margin: 1rem;" type="submit" value="submit">Aggiungi articolo</button>
+                
+                <button class="btn btn-dark" style="margin: 1rem;" type="button" (click)="TornaAgliArticoli()">Ritorna alla lista articoli</button>
+            </form>
+
+        </div>
+    </div>
+</div>

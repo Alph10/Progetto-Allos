@@ -1,0 +1,51 @@
+<h3>Aggiungi negozio</h3><br>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+
+            <form class="mb-3" [formGroup]="formNegozio" (ngSubmit)="AggiungiNegozio()">
+                <div class="mb-4">
+                    <label class="form-label" for="nomeNegozio">Negozio</label>
+                    <input class="form-control" formControlName="nomeNegozio" name="nomeNegozio" type="text">
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label" for="indirizzoNegozio">Indirizzo</label>
+                    <input class="form-control" formControlName="indirizzoNegozio" name="indirizzoNegozio" type="text">
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label" for="dimensione_mqNegozio">Dimensione metri quadri</label>
+                    <input class="form-control" formControlName="dimensione_mqNegozio" name="dimensione_mqNegozio" type="number">
+                </div>
+
+                <label class="form-label" for="dimensione_magazzino_mqNegozio">Dimensione magazzino metri quadri</label>
+                <input class="form-control" formControlName="dimensione_magazzino_mqNegozio" name="dimensione_magazzino_mqNegozio" type="number">
+
+                <br>
+
+                <div class="alert alert-danger"*ngIf="formNegozio.controls['nomeNegozio'].invalid && formNegozio.controls['nomeNegozio'].touched">
+                    Inserire il nome del negozio
+                </div>
+
+                <div class="alert alert-danger"*ngIf="formNegozio.controls['indirizzoNegozio'].invalid && formNegozio.controls['indirizzoNegozio'].touched">
+                    Inserire il codice del negozio
+                </div>
+
+                <div class="alert alert-danger"*ngIf="formNegozio.controls['dimensione_mqNegozio'].invalid && formNegozio.controls['dimensione_mqNegozio'].touched">
+                    Inserire la dimensione in metri quadri del negozio
+                </div>
+
+                <div class="alert alert-danger"*ngIf="formNegozio.controls['dimensione_magazzino_mqNegozio'].invalid && formNegozio.controls['dimensione_magazzino_mqNegozio'].touched">
+                    Inserire la dimensione del magazzino in metri quadri
+                </div>
+
+                <button class="btn btn-dark"  style="margin: 1rem;" type="submit" value="submit">Aggiungi negozio</button>
+                
+                <button class="btn btn-dark"  style="margin: 1rem;" type="button" (click)="TornaAiNegozi()">Ritorna alla lista negozi</button>
+            </form>
+
+        </div>
+    </div>
+</div>

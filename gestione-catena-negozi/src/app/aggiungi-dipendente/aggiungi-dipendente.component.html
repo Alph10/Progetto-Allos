@@ -1,0 +1,65 @@
+<h3>Aggiungi dipendente</h3><br>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+
+            <form class="mb-3" [formGroup]="formDipendente" (ngSubmit)="AggiungiDipendente()">
+                <div class="mb-4">
+                    <label class="form-label" for="nomeDipendente">Nome</label>
+                    <input class="form-control" formControlName="nomeDipendente" name="nomeDipendente" type="text">
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label" for="cognomeDipendente">Cognome</label>
+                    <input class="form-control" formControlName="cognomeDipendente" name="cognomeDipendente" type="text">
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label" for="data_di_nascitaDipendente">Data di nascita</label>
+                    <input class="form-control" formControlName="data_di_nascitaDipendente" name="data_di_nascitaDipendente" type="date">
+                </div>
+
+                <label class="form-label" for="codice_fiscaleDipendente">Codice fiscale</label>
+                <input class="form-control" formControlName="codice_fiscaleDipendente" name="codice_fiscaleDipendente" type="text">
+
+                <label class="form-label" for="numero_matricolaDipendente">Numero matricola</label>
+                <input class="form-control" formControlName="numero_matricolaDipendente" name="numero_matricolaDipendente" type="number">
+
+                <div class="form-check mb-4 mt-4">
+                    <label class="form-check-label" for="responsabileDipendente">Responsabile</label>
+                    <input class="form-check-input" formControlName="responsabileDipendente" name="responsabileDipendente" type="checkbox">
+                </div>
+
+                <div class="alert alert-danger"*ngIf="formDipendente.controls['nomeDipendente'].invalid && formDipendente.controls['nomeDipendente'].touched">
+                    Inserire il nome del dipendente
+                </div>
+
+                <div class="alert alert-danger"*ngIf="formDipendente.controls['cognomeDipendente'].invalid && formDipendente.controls['cognomeDipendente'].touched">
+                    Inserire il cognome del dipendente
+                </div>
+
+                <div class="alert alert-danger"*ngIf="formDipendente.controls['data_di_nascitaDipendente'].invalid && formDipendente.controls['data_di_nascitaDipendente'].touched">
+                    Inserire la data di nascita del dipendente
+                </div>
+
+                <div class="alert alert-danger"*ngIf="formDipendente.controls['codice_fiscaleDipendente'].invalid && formDipendente.controls['codice_fiscaleDipendente'].touched">
+                    Inserire il codice fiscale del dipendente
+                </div>
+
+                <div class="alert alert-danger"*ngIf="formDipendente.controls['numero_matricolaDipendente'].invalid && formDipendente.controls['numero_matricolaDipendente'].touched">
+                    Inserire il numero matricola del dipendente
+                </div>
+
+                <div class="alert alert-danger"*ngIf="numeroMatricolaDipendenteDuplicato">
+                    Esiste già un dipendente con quel numero di matricola
+                </div>
+
+                <button class="btn btn-dark"  style="margin: 1rem;" type="submit" value="submit">Aggiungi dipendente</button>
+                
+                <button class="btn btn-dark"  style="margin: 1rem;" type="button" (click)="TornaAiDipendenti()">Ritorna alla lista dipendenti</button>
+            </form>
+
+        </div>
+    </div>
+</div>

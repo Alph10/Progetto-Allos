@@ -1,0 +1,32 @@
+<div class="container">
+    
+    <div class="row">
+        <div class="col-12">
+            <h3>Modifica giacenza</h3>
+            <h4>{{ articolo.articolo }}<span *ngIf="articolo.taglia;">, taglia {{ giacenza.taglia }}</span></h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+
+            <form #entryTemplateForm = "ngForm" (ngSubmit)="ModificaGiacenza()">
+
+                <div class="mb-3">
+                    <label class="form-label" for="formQuantita">Quantità</label>
+                    <input class="form-control" [(ngModel)]="giacenza.quantita" name="formQuantita" type="number">
+                </div>
+
+                <div class="alert alert-danger" *ngIf="giacenza.quantita < 1">
+                    Inserire la quantità
+                </div>
+                
+                <button class="btn btn-dark" style="margin: 1rem;" type="submit" value="submit">Modifica Giacenza</button>
+                
+                <button class="btn btn-dark" style="margin: 1rem;" type="button" (click)="TornaAlleGiacenze()">Ritorna alla lista giacenze</button>
+
+            </form>
+
+        </div>
+    </div>
+</div>

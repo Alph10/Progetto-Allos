@@ -1,0 +1,58 @@
+<h3>Modifica negozio: {{ negozio.negozio }}</h3>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+
+            <form #entryTemplateForm = "ngForm" (ngSubmit)="ModificaNegozio()">
+                <div class="mb-3">
+                    <label class="form-label" for="formNegozio">Negozio</label>
+                    <input class="form-control" [(ngModel)]="negozio.negozio" name="formNegozio" type="text">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="formIndirizzo">Indirizzo</label>
+                    <input class="form-control" [(ngModel)]="negozio.indirizzo" name="formIndirizzo" type="text">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="formDimensioneMq">Dimensione mq</label>
+                    <input class="form-control" [(ngModel)]="negozio.dimensione_mq" name="formDimensioneMq" type="text">
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label" for="formDimensioneMagazzinoMq">Dimensione magazzino mq</label>
+                    <input class="form-control" [(ngModel)]="negozio.dimensione_magazzino_mq" name="formDimensioneMagazzinoMq" type="text">
+                </div>
+
+                <div class="alert alert-danger"*ngIf="negozio.negozio == ''">
+                    Inserire il nome del negozio
+                </div>
+
+                <div class="alert alert-danger"*ngIf="negozio.indirizzo == ''">
+                    Inserire l'indirizzo del negozio
+                </div>
+
+                <div class="alert alert-danger"*ngIf="negozio.dimensione_mq == null || negozio.dimensione_mq < 0.01">
+                    Inserire la dimensione in metri quadri del negozio
+                </div>
+
+                <div class="alert alert-danger"*ngIf="negozio.dimensione_magazzino_mq == null || negozio.dimensione_magazzino_mq < 0.01">
+                    Inserire la dimensione in metri quadri del magazzino
+                </div>
+                
+                <div>
+                    <button class="btn btn-dark" style="margin: 1rem;" type="submit" value="submit">Modifica negozio</button>
+
+                    <button class="btn btn-dark" style="margin: 1rem;" type="button" (click)="Dipendenti()">Dipendenti</button>
+
+                    <button class="btn btn-dark" style="margin: 1rem;" type="button" (click)="Giacenze()">Giacenze</button>
+                    
+                    <button class="btn btn-dark" style="margin: 1rem;" type="button" (click)="TornaAiNegozi()">Ritorna alla lista negozi</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>

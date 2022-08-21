@@ -1,0 +1,65 @@
+<h3>Modifica articolo</h3>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+
+            <form #entryTemplateForm = "ngForm" (ngSubmit)="ModificaArticolo()">
+                <div class="mb-3">
+                    <label class="form-label" for="formArticolo">Articolo</label>
+                    <input class="form-control" [(ngModel)]="articolo.articolo" name="formArticolo" type="text">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="formCodice">Codice</label>
+                    <input class="form-control" [(ngModel)]="articolo.codice" name="formCodice" type="number">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="formPrezzo">Prezzo</label>
+                    <input class="form-control" [(ngModel)]="articolo.prezzo" name="formPrezzo" type="number">
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label" for="formPeso">Peso</label>
+                    <input class="form-control" [(ngModel)]="articolo.peso" name="formPeso" type="number">
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label" for="formSezione">Sezione</label>
+                    <input class="form-control" [(ngModel)]="articolo.sezione" name="formSezione" type="text">
+                </div>
+
+                <div class="alert alert-danger"*ngIf="articolo.articolo == ''">
+                    Inserire il nome dell'articolo
+                </div>
+
+                <div class="alert alert-danger"*ngIf="articolo.codice == null || articolo.codice < 0">
+                    Inserire il codice dell'articolo
+                </div>
+
+                <div class="alert alert-danger"*ngIf="articolo.prezzo == null || articolo.prezzo < 0.01">
+                    Inserire il prezzo dell'articolo
+                </div>
+
+                <div class="alert alert-danger"*ngIf="articolo.peso == null || articolo.peso < 0.01">
+                    Inserire il peso dell'articolo
+                </div>
+
+                <div class="alert alert-danger"*ngIf="articolo.sezione == ''">
+                    Inserire la sezione dell'articolo
+                </div>
+
+                <div class="alert alert-danger"*ngIf="codiceArticoloDuplicato">
+                    Esiste già un articolo con quel codice
+                </div>
+                
+                <button class="btn btn-dark" style="margin: 1rem;" type="submit" value="submit">Modifica articolo</button>
+                
+                <button class="btn btn-dark" style="margin: 1rem;" type="button" (click)="TornaAgliArticoli()">Ritorna alla lista articoli</button>
+
+            </form>
+
+        </div>
+    </div>
+</div>

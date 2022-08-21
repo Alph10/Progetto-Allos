@@ -1,0 +1,54 @@
+
+<div class="container">
+    
+    <div class="row">
+        <div class="col-12">
+            <h3>Aggiungi giacenza: {{ negozio.negozio }}</h3><br>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+
+            <form class="mb-3" [formGroup]="formGiacenza" (ngSubmit)="AggiungiGiacenza()">
+                <div class="mb-3">
+                    <label class="form-label" for="articoloGiacenza">Articolo</label>
+                    <select class="form-select" formControlName="articoloGiacenza" name="articoloGiacenza" aria-label="Seleziona un articolo">
+                        <option *ngFor="let art of articoli" [ngValue]="art">{{ art.articolo }}</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="quantitaGiacenza">Quantita</label>
+                    <input class="form-control" formControlName="quantitaGiacenza" name="quantitaGiacenza" type="number">
+                </div>
+
+                <div class="mb-3" *ngIf="formGiacenza.controls['articoloGiacenza'].value.taglia">
+                    <label class="form-label" for="tagliaGiacenza">Taglia</label>
+                    <input class="form-control" formControlName="tagliaGiacenza" name="tagliaGiacenza" type="number">
+                </div>
+
+                <div class="alert alert-danger" *ngIf="formGiacenza.controls['articoloGiacenza'].invalid && formGiacenza.controls['articoloGiacenza'].touched">
+                    Inserire il nome dell'articolo
+                </div>
+
+                <div class="alert alert-danger" *ngIf="formGiacenza.controls['quantitaGiacenza'].invalid && formGiacenza.controls['quantitaGiacenza'].touched">
+                    Inserire la quantità
+                </div>
+
+                <div class="alert alert-danger" *ngIf="formGiacenza.controls['articoloGiacenza'].value.taglia && formGiacenza.controls['tagliaGiacenza'].invalid && formGiacenza.controls['tagliaGiacenza'].touched">
+                    Inserire la taglia
+                </div>
+
+                <div class="alert alert-danger" *ngIf="giacenzaDuplicata">
+                    Una giacenza uguale è già presente in questo negozio. Per modificare la quantità premere sulla giacenza dalla lista delle giacenze.
+                </div>
+
+                <button class="btn btn-dark" style="margin: 1rem;" type="submit" value="submit">Aggiungi giacenza</button>
+                
+                <button class="btn btn-dark" style="margin: 1rem;" type="button" (click)="TornaAlleGiacenze()">Ritorna alla lista giacenze</button>
+            </form>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,68 @@
+<h3>Modifica dipendente: {{ dipendente.numero_matricola }}</h3>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+
+            <form #entryTemplateForm = "ngForm" (ngSubmit)="ModificaDipendente()">
+                <div class="mb-3">
+                    <label class="form-label" for="formNome">Nome</label>
+                    <input class="form-control" [(ngModel)]="dipendente.nome" name="formNome" type="text">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="formCognome">Cognome</label>
+                    <input class="form-control" [(ngModel)]="dipendente.cognome" name="formCognome" type="text">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="formDataDiNascita">Data di nascita</label>
+                    <input class="form-control" [(ngModel)]="dipendente.data_di_nascita" name="formDataDiNascita" type="date">
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label" for="formCodiceFiscale">Codice fiscale</label>
+                    <input class="form-control" [(ngModel)]="dipendente.codice_fiscale" name="formCodiceFiscale" type="text">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="formNumeroMatricola">Numero matricola</label>
+                    <input class="form-control" [(ngModel)]="dipendente.numero_matricola" name="formNumeroMatricola" type="number">
+                </div>
+                
+                <div class="form-check mb-4 mt-4">
+                    <label class="form-check-label" for="formResponsabile">Responsabile</label>
+                    <input class="form-check-input" [(ngModel)]="dipendente.responsabile" name="formResponsabile" type="checkbox">
+                </div>
+
+                <div class="alert alert-danger" *ngIf="dipendente.nome == ''">
+                    Inserire il nome del dipendente
+                </div>
+
+                <div class="alert alert-danger" *ngIf="dipendente.cognome == ''">
+                    Inserire il cognome del dipendente
+                </div>
+
+                <div class="alert alert-danger" *ngIf="dipendente.codice_fiscale == ''">
+                    Inserire il codice fiscale del dipendente
+                </div>
+                
+                <div class="alert alert-danger" *ngIf="dipendente.numero_matricola == null || dipendente.numero_matricola < 0">
+                    Inserire il numero di matricola del dipendente
+                </div>
+
+                <div class="alert alert-danger" *ngIf="numeroMatricolaDipendenteDuplicato">
+                    Esiste già un dipendente con quel numero di matricola
+                </div>
+                
+                <div>
+                    <button class="btn btn-dark" style="margin: 1rem;" type="submit" value="submit">Modifica dipendente</button>
+                    
+                    <button class="btn btn-dark" style="margin: 1rem;" type="button" (click)="TornaAiDipendenti()">Ritorna alla lista dipendenti</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>

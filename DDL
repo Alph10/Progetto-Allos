@@ -1,0 +1,55 @@
+DDL
+
+
+CREATE TABLE TB_NEGOZI (
+    id_negozio INTEGER PRIMARY KEY AUTOINCREMENT,
+    negozio TEXT,
+    indirizzo TEXT,
+    dimensione_mq REAL,
+    dimensione_magazzino_mq REAL,
+    num_dipendenti INTEGER
+)
+
+
+CREATE TABLE TB_DIPENDENTI (
+    id_dipendente INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_negozio INTEGER NOT NULL REFERENCES TB_NEGOZI(id_negozio) ON DELETE CASCADE,
+    numero_matricola INTEGER UNIQUE,
+    nome TEXT,
+    cognome REAL,
+    data_di_nascita DATE,
+    responsabile BOOLEAN,
+    codice_fiscale TEXT
+)
+
+CREATE TRIGGER after_insert_dipendente AFTER INSERT ON TB_DIPENDENTI
+    BEGIN 
+        UPDATE TB_NEGOZI SET num_dipendenti = num_dipendenti + 1
+        WHERE id_negozio = NEW.id_negozio;
+    END;
+
+CREATE TRIGGER after_delete_dipendente AFTER DELETE ON TB_DIPENDENTI
+    BEGIN 
+        UPDATE TB_NEGOZI SET num_dipendenti = num_dipendenti - 1
+        WHERE id_negozio = OLD.id_negozio;
+    END;
+
+
+CREATE TABLE TB_ARTICOLI (
+    id_articolo INTEGER PRIMARY KEY AUTOINCREMENT,
+    codice INTEGER UNIQUE,
+    articolo TEXT,
+    prezzo REAL,
+    peso REAL,
+    sezione TEXT,
+    taglia BOOLEAN
+)
+
+
+CREATE TABLE TB_GIACENZE (
+    id_giacenza INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_negozio INTEGER NOT NULL REFERENCES TB_NEGOZI(id_negozio) ON DELETE CASCADE,
+    id_articolo INTEGER NOT NULL REFERENCES TB_ARTICOLI(id_articolo) ON DELETE CASCADE,
+    quantita INTEGER,
+    taglia REAL
+)
