@@ -48,8 +48,8 @@ export class DipendentiComponent implements OnInit {
     this.router.navigate(['modifica-dipendente/' + this.clickedDipendente.id_dipendente]);
   }
 
-  eliminaDipendente(id_articolo:number, i:number) {
-    this.dipService.deleteDipendente(id_articolo).subscribe( (response) => {
+  eliminaDipendente(id_dipendente:number, i:number) {
+    this.dipService.deleteDipendente(id_dipendente).subscribe( (response) => {
       this.dipendenti.splice(i, 1);
     });
   }

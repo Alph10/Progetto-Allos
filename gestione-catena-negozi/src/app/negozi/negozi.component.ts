@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { Negozio } from '../models/Negozio';
 import { NegozioService } from '../services/negozio.service';
+import { Dipendente } from '../models/Dipendente';
+import { DipendenteService } from '../services/dipendente.service';
 
 @Component({
   selector: 'app-negozio',
@@ -14,9 +16,13 @@ export class NegoziComponent implements OnInit {
   negozi: Negozio[];
   clickedNegozio: Negozio;
 
-  constructor(public negService: NegozioService, private router: Router) {
+  dipendenti: Dipendente[];
+
+  constructor(public negService: NegozioService, public dipService: DipendenteService, private router: Router) {
     this.negozi = [];
     this.clickedNegozio = new Negozio;
+
+    this.dipendenti = [];
   }
 
   ngOnInit(): void {
@@ -24,7 +30,13 @@ export class NegoziComponent implements OnInit {
       if (response && response.length > 0) {
         this.negozi = response;
       }
-    })
+    });
+
+    this.dipService.getDipendenti().subscribe((response: Dipendente[]) => {
+      if (response && response.length > 0) {
+        this.dipendenti = response;
+      }
+    });
   }
 
   modificaNegozio(neg: Negozio) {
@@ -32,9 +44,22 @@ export class NegoziComponent implements OnInit {
     this.router.navigate(['modifica-negozio/' + this.clickedNegozio.id_negozio]);
   }
 
-  eliminaNegozio(id_articolo:number, i:number) {
-    this.negService.deleteNegozio(id_articolo).subscribe( (response) => {
+  eliminaNegozio(id_negozio:number, i:number) {
+    this.negService.deleteNegozio(id_negozio).subscribe( (response) => {
       this.negozi.splice(i, 1);
+
+      // ON DELETE CASCADE non funziona nell'applicazione (anche se inviando un comando DELETE al database va), quindi lo aggiungo col codice
+      let onDeleteCascadeDipendenti: Dipendente[];
+      onDeleteCascadeDipendenti = this.dipendenti.filter( dipendente => { return dipendente.id_negozio == id_negozio } );
+
+      console.log(this.dipendenti);
+      console.log(id_negozio);
+      console.log(onDeleteCascadeDipendenti);
+      onDeleteCascadeDipendenti.forEach(dipendente => {
+        this.dipService.deleteDipendente(dipendente.id_dipendente).subscribe( (response) => {
+          this.dipendenti.splice(i, 1);
+        });
+      });
     });
   }
 
