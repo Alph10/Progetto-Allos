@@ -5,6 +5,8 @@ import { Negozio } from '../models/Negozio';
 import { NegozioService } from '../services/negozio.service';
 import { Dipendente } from '../models/Dipendente';
 import { DipendenteService } from '../services/dipendente.service';
+import { Giacenza } from '../models/Giacenza';
+import { GiacenzaService } from '../services/giacenza.service';
 
 @Component({
   selector: 'app-negozio',
@@ -18,11 +20,15 @@ export class NegoziComponent implements OnInit {
 
   dipendenti: Dipendente[];
 
-  constructor(public negService: NegozioService, public dipService: DipendenteService, private router: Router) {
+  giacenze: Giacenza[];
+
+  constructor(public negService: NegozioService, public dipService: DipendenteService, public giacService: GiacenzaService, private router: Router) {
     this.negozi = [];
     this.clickedNegozio = new Negozio;
 
     this.dipendenti = [];
+
+    this.giacenze = [];
   }
 
   ngOnInit(): void {
@@ -35,6 +41,12 @@ export class NegoziComponent implements OnInit {
     this.dipService.getDipendenti().subscribe((response: Dipendente[]) => {
       if (response && response.length > 0) {
         this.dipendenti = response;
+      }
+    });
+
+    this.giacService.getGiacenze().subscribe((response: Giacenza[]) => {
+      if (response && response.length > 0) {
+        this.giacenze = response;
       }
     });
   }
@@ -52,14 +64,21 @@ export class NegoziComponent implements OnInit {
       let onDeleteCascadeDipendenti: Dipendente[];
       onDeleteCascadeDipendenti = this.dipendenti.filter( dipendente => { return dipendente.id_negozio == id_negozio } );
 
-      console.log(this.dipendenti);
-      console.log(id_negozio);
-      console.log(onDeleteCascadeDipendenti);
       onDeleteCascadeDipendenti.forEach(dipendente => {
         this.dipService.deleteDipendente(dipendente.id_dipendente).subscribe( (response) => {
           this.dipendenti.splice(i, 1);
         });
       });
+
+      let onDeleteCascadeGiacenze: Giacenza[];
+      onDeleteCascadeGiacenze = this.giacenze.filter( giacenza => { return giacenza.id_negozio == id_negozio } );
+
+      onDeleteCascadeGiacenze.forEach(giacenza => {
+        this.giacService.deleteGiacenza(giacenza.id_giacenza).subscribe( (response) => {
+          this.giacenze.splice(i, 1);
+        });
+      });
+      
     });
   }
 
